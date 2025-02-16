@@ -1,63 +1,54 @@
 source "https://rubygems.org"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.0.1"
-# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft"
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem 'rails', '8.0.1'
+gem 'pg', '>= 1.1'        # PostgreSQL用のgem
+gem 'puma', '~> 5.0'      # デフォルトのWebサーバ
+gem 'propshaft'           # モダンなAsset Pipeline
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "tzinfo-data", platforms: %i[ windows jruby ] # タイムゾーン情報
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem 'bootsnap', require: false # 起動時間短縮
+gem "kamal", require: false # Dockerコンテナデプロイ
+gem "thruster", require: false # HTTPアセットキャッシュ
 
-# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
 
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem "solid_cache"       # キャッシュ
+gem "solid_queue"       # キャッシュ、ジョブ
+gem "solid_cable"        # キャッシュ、ジョブ、WebSocket
 
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
+# フロントエンドの設定（Importmapを利用する場合）
+gem 'importmap-rails'
 
-# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
-gem "thruster", require: false
+# JavaScriptやCSSをビルドする場合は、代わりに以下のような設定も検討してください
+gem 'esbuild', '~> 0.17' # JavaScriptのビルド
+gem 'tailwindcss-rails' # CSSフレームワーク
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem 'turbo-rails'       # Hotwire Turbo（ページ遷移高速化）
+gem 'stimulus-rails'    # Hotwire Stimulus（JavaScriptのフレームワーク）
+gem 'jbuilder', '~> 2.7'  # JSON生成用
+
+
+gem "bcrypt", "~> 3.1.7"  # パスワードのハッシュ化
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
-
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
+  gem 'byebug'          # デバッグ用
+  gem 'pry-byebug'      # デバッグ用
+  gem 'pry-rails'       # デバッグ用
+  gem 'rspec-rails'     # テスト用
+  gem 'factory_bot_rails'  # テスト用
+  gem 'database_cleaner-active_record'  # テスト用
+  gem 'faker'           # テスト用
+  gem 'rubocop'         # コード解析
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
+  gem 'web-console'     # ブラウザ上でのコンソール
+  gem 'listen', '~> 3.3'  # ファイル変更監視
+  gem 'spring'          # アプリ起動の高速化
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'capybara'        # 統合テスト用
+  gem 'selenium-webdriver'  # ブラウザ自動操作
+  gem 'webdrivers'      # ドライバー自動管理
 end
