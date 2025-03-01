@@ -1,11 +1,30 @@
 <h1>User Profile</h1>
 
 <p>
-  <strong>First Name:</strong>
-  <%= @user.family_name %>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>  
+<p>
+  <strong>Name Order:</strong>
+  <%= @user.name_order %>
 </p>
 
-<p>
-  <strong>Last Name:</strong>
-  <%= @user.given_name %>
-</p>
+<% if @user.name_order == "western" %>
+  <p>
+    <strong>Given Name:</strong>
+    <%= @user.given_name %>
+  </p>
+  <p>
+    <strong>Family Name:</strong>
+    <%= @user.family_name %>
+  </p>
+<% else %>
+  <p>
+    <strong>Family Name:</strong>
+    <%= @user.family_name %>
+  </p>
+  <p>
+    <strong>Given Name:</strong>
+    <%= @user.given_name %>
+  </p>
+<% end %>

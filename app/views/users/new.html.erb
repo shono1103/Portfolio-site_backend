@@ -13,13 +13,32 @@
   <% end %>
 
   <div>
-    <%= f.label :family_name %>
-    <%= f.text_field :family_name %>
+    <%= f.label :name_order, "Name Order" %>
+    <%= f.select :name_order, [["Western", "western"], ["Eastern", "eastern"]], {}, { id: "name_order_select" } %>
   </div>
-  <div>
-    <%= f.label :given_name %>
-    <%= f.text_field :given_name %>
+
+  <div id="western_order">
+    <div>
+      <%= f.label :given_name, "Given Name" %>
+      <%= f.text_field :given_name %>
+    </div>
+    <div>
+      <%= f.label :family_name, "Family Name" %>
+      <%= f.text_field :family_name %>
+    </div>
   </div>
+
+  <div id="eastern_order" style="display: none;">
+    <div>
+      <%= f.label :family_name, "Family Name" %>
+      <%= f.text_field :family_name %>
+    </div>
+    <div>
+      <%= f.label :given_name, "Given Name" %>
+      <%= f.text_field :given_name %>
+    </div>
+  </div>
+
   <div>
     <%= f.label :email %>
     <%= f.email_field :email %>
@@ -36,3 +55,21 @@
     <%= f.submit "Sign Up" %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const nameOrderSelect = document.getElementById("name_order_select");
+    const westernOrder = document.getElementById("western_order");
+    const easternOrder = document.getElementById("eastern_order");
+
+    nameOrderSelect.addEventListener("change", function() {
+      if (nameOrderSelect.value === "western") {
+        westernOrder.style.display = "block";
+        easternOrder.style.display = "none";
+      } else {
+        westernOrder.style.display = "none";
+        easternOrder.style.display = "block";
+      }
+    });
+  });
+</script>

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login, only: [:show]
+  
   def new
     @user = User.new
   end
@@ -22,5 +24,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:family_name, :given_name, :email, :password, :password_confirmation)
+  end
+
+  def require_login
+    unless session[:user_id]
+      flash[:alert] = "ログインが必要です"
+      redirect_to login_path
+    end
   end
 end
