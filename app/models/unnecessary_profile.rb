@@ -1,0 +1,2 @@
+class UnnecessaryProfile < ApplicationRecord
+end

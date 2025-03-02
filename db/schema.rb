@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_23_053233) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_02_040924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "necessary_profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date_of_birth"
+    t.string "residence"
+    t.string "job"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_necessary_profiles_on_user_id"
+  end
+
+  create_table "unnecessary_profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "place_of_birth"
+    t.string "certificate", default: [], array: true
+    t.string "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_unnecessary_profiles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -23,4 +43,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_23_053233) do
     t.string "email"
     t.string "password_digest"
   end
+
+  add_foreign_key "necessary_profiles", "users"
+  add_foreign_key "unnecessary_profiles", "users"
 end

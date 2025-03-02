@@ -1,0 +1,2 @@
+class NecessaryProfile < ApplicationRecord
+end
