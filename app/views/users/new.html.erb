@@ -1,0 +1,75 @@
+<h1>Sign Up</h1>
+<%= form_with(model: @user, url: users_path, local: true) do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name_order, "Name Order" %>
+    <%= f.select :name_order, [["Western", "western"], ["Eastern", "eastern"]], {}, { id: "name_order_select" } %>
+  </div>
+
+  <div id="western_order">
+    <div>
+      <%= f.label :given_name, "Given Name" %>
+      <%= f.text_field :given_name %>
+    </div>
+    <div>
+      <%= f.label :family_name, "Family Name" %>
+      <%= f.text_field :family_name %>
+    </div>
+  </div>
+
+  <div id="eastern_order" style="display: none;">
+    <div>
+      <%= f.label :family_name, "Family Name" %>
+      <%= f.text_field :family_name %>
+    </div>
+    <div>
+      <%= f.label :given_name, "Given Name" %>
+      <%= f.text_field :given_name %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div>
+    <%= f.submit "Sign Up" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const nameOrderSelect = document.getElementById("name_order_select");
+    const westernOrder = document.getElementById("western_order");
+    const easternOrder = document.getElementById("eastern_order");
+
+    nameOrderSelect.addEventListener("change", function() {
+      if (nameOrderSelect.value === "western") {
+        westernOrder.style.display = "block";
+        easternOrder.style.display = "none";
+      } else {
+        westernOrder.style.display = "none";
+        easternOrder.style.display = "block";
+      }
+    });
+  });
+</script>

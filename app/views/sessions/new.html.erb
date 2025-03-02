@@ -1,0 +1,18 @@
+<h1>Login</h1>
+<%= form_with(url: login_path, local: true) do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, name: "session[email]" %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, name: "session[password]" %>
+  </div>
+  <div>
+    <%= f.submit "Login" %>
+  </div>
+<% end %>
+
+<!-- 新規アカウント作成ボタン -->
+<p>アカウントをお持ちでないですか？</p>
+<%= link_to "新規登録", signup_path, class: "btn btn-primary" %>
