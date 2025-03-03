@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <title>PortfolioSite</title>
+
+<head>
+    <title>PortfolioSite</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -20,17 +21,33 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
-    <%= yield %>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><%= link_to 'Home', root_path %></li>
+                <li><%= link_to 'Sign Up', signup_path %></li>
+                <li><%= link_to 'Login', login_path %></li>
+                <% if logged_in? %>
+                <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+                <% end %>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <%= yield %>
+    </div>
 
     <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
+    <div class="notice"><%= flash[:notice] %></div>
     <% end %>
 
     <% if flash[:alert] %>
-      <div class="alert"><%= flash[:alert] %></div>
+    <div class="alert"><%= flash[:alert] %></div>
     <% end %>
-  </body>
+</body>
+
 </html>

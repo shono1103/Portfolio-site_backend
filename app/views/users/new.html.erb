@@ -1,75 +1,92 @@
 <h1>Sign Up</h1>
 <%= form_with(model: @user, url: users_path, local: true) do |f| %>
 
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
         <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <li><%= message %></li>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </ul>
+</div>
+<% end %>
 
-  <div>
+<div>
     <%= f.label :name_order, "Name Order" %>
     <%= f.select :name_order, [["Western", "western"], ["Eastern", "eastern"]], {}, { id: "name_order_select" } %>
-  </div>
+</div>
 
-  <div id="western_order">
+<div id="western_order">
     <div>
-      <%= f.label :given_name, "Given Name" %>
-      <%= f.text_field :given_name %>
+        <%= f.label :given_name, "Given Name" %>
+        <%= f.text_field :given_name %>
     </div>
     <div>
-      <%= f.label :family_name, "Family Name" %>
-      <%= f.text_field :family_name %>
+        <%= f.label :family_name, "Family Name" %>
+        <%= f.text_field :family_name %>
     </div>
-  </div>
+</div>
 
-  <div id="eastern_order" style="display: none;">
+<div id="eastern_order" style="display: none;">
     <div>
-      <%= f.label :family_name, "Family Name" %>
-      <%= f.text_field :family_name %>
+        <%= f.label :family_name, "Family Name" %>
+        <%= f.text_field :family_name %>
     </div>
     <div>
-      <%= f.label :given_name, "Given Name" %>
-      <%= f.text_field :given_name %>
+        <%= f.label :given_name, "Given Name" %>
+        <%= f.text_field :given_name %>
     </div>
-  </div>
+</div>
 
-  <div>
+<div>
     <%= f.label :email %>
     <%= f.email_field :email %>
-  </div>
-  <div>
+</div>
+<div>
     <%= f.label :password %>
     <%= f.password_field :password %>
-  </div>
-  <div>
+</div>
+<div>
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
-  </div>
-  <div>
+</div>
+
+<h2>必要なプロフィール</h2>
+<%= f.fields_for :necessary_profile do |np| %>
+<div>
+    <%= np.label :date_of_birth, "生年月日" %>
+    <%= np.date_field :date_of_birth %>
+</div>
+<div>
+    <%= np.label :residence, "住所" %>
+    <%= np.text_field :residence %>
+</div>
+<div>
+    <%= np.label :job, "職業" %>
+    <%= np.text_field :job %>
+</div>
+<% end %>
+
+<div>
     <%= f.submit "Sign Up" %>
-  </div>
+</div>
 <% end %>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const nameOrderSelect = document.getElementById("name_order_select");
-    const westernOrder = document.getElementById("western_order");
-    const easternOrder = document.getElementById("eastern_order");
+    document.addEventListener("DOMContentLoaded", function() {
+        const nameOrderSelect = document.getElementById("name_order_select");
+        const westernOrder = document.getElementById("western_order");
+        const easternOrder = document.getElementById("eastern_order");
 
-    nameOrderSelect.addEventListener("change", function() {
-      if (nameOrderSelect.value === "western") {
-        westernOrder.style.display = "block";
-        easternOrder.style.display = "none";
-      } else {
-        westernOrder.style.display = "none";
-        easternOrder.style.display = "block";
-      }
+        nameOrderSelect.addEventListener("change", function() {
+            if (nameOrderSelect.value === "western") {
+                westernOrder.style.display = "block";
+                easternOrder.style.display = "none";
+            } else {
+                westernOrder.style.display = "none";
+                easternOrder.style.display = "block";
+            }
+        });
     });
-  });
 </script>

@@ -1,30 +1,54 @@
-<h1>User Profile</h1>
+<h1>ユーザー詳細</h1>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>  
-<p>
-  <strong>Name Order:</strong>
-  <%= @user.name_order %>
+    <strong>名前:</strong>
+    <% if @user.name_order == "western" %>
+    <%= @user.given_name %> <%= @user.family_name %>
+    <% else %>
+    <%= @user.family_name %> <%= @user.given_name %>
+    <% end %>
 </p>
 
-<% if @user.name_order == "western" %>
-  <p>
-    <strong>Given Name:</strong>
-    <%= @user.given_name %>
-  </p>
-  <p>
-    <strong>Family Name:</strong>
-    <%= @user.family_name %>
-  </p>
+<p>
+    <strong>メールアドレス:</strong>
+    <%= @user.email %>
+</p>
+
+<h2>必要なプロフィール</h2>
+<% if @necessary_profile %>
+<p>
+    <strong>生年月日:</strong>
+    <%= @necessary_profile.date_of_birth %>
+</p>
+<p>
+    <strong>住所:</strong>
+    <%= @necessary_profile.residence %>
+</p>
+<p>
+    <strong>職業:</strong>
+    <%= @necessary_profile.job %>
+</p>
 <% else %>
-  <p>
-    <strong>Family Name:</strong>
-    <%= @user.family_name %>
-  </p>
-  <p>
-    <strong>Given Name:</strong>
-    <%= @user.given_name %>
-  </p>
+<p>必要なプロフィールがありません。</p>
 <% end %>
+
+<h2>不要なプロフィール</h2>
+<% if @unnecessary_profile %>
+<p>
+    <strong>出生地:</strong>
+    <%= @unnecessary_profile.place_of_birth %>
+</p>
+<p>
+    <strong>証明書:</strong>
+    <%= @unnecessary_profile.certificate.join(", ") %>
+</p>
+<p>
+    <strong>自己紹介:</strong>
+    <%= @unnecessary_profile.bio %>
+</p>
+<% else %>
+<p>不要なプロフィールがありません。</p>
+<% end %>
+
+<%= link_to '編集', edit_user_path(@user) %>
+<%= link_to '戻る', users_path %>

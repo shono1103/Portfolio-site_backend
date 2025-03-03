@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   #ユーザーのルーティング
   get 'signup', to: 'users#new'
   post 'users', to: 'users#create'
-  resources :users, only: [:show]
-  
+  get 'users/:id/edit', to: 'users#edit'
+  patch 'users/:id/update', to: 'users#update'
+  resources :users, only: [:show ,:edit, :update]
+  #ルートのルーティング
+  root 'sessions#new'
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
