@@ -37,7 +37,7 @@
     <%= f.fields_for :necessary_profile do |np| %>
     <div>
         <%= np.label :date_of_birth, "生年月日" %>
-        <%= np.date_field :date_of_birth, value: @necessary_profile.date_of_birth || "" %>
+        <%= np.date_field :date_of_birth, value: @necessary_profile.date_of_birth%>
     </div>
     <div>
         <%= np.label :residence, "住所" %>
@@ -55,11 +55,7 @@
     <%= f.fields_for :unnecessary_profile do |up| %>
     <div>
         <%= up.label :place_of_birth, "出生地" %>
-        <%= up.text_field :place_of_birth, value: @unnecessary_profile.place_of_birth || "" %>
-    </div>
-    <div>
-        <%= up.label :certificate, "証明書" %>
-        <%= up.text_field :certificate, value: @unnecessary_profile.certificate || "" %>
+        <%= up.text_field :place_of_birth%>
     </div>
     <div>
         <%= up.label :bio, "自己紹介" %>

@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
       flash[:notice] = "アカウントが作成されました！"
       redirect_to @user
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:family_name, :given_name, :email, :password, :password_confirmation, :name_order, necessary_profile_attributes: [:id, :date_of_birth, :residence, :job], unnecessary_profile_attributes: [:id, :place_of_birth, { certificate: [] }, :bio])
+    params.require(:user).permit(:family_name, :given_name, :email, :password, :password_confirmation, :name_order, necessary_profile_attributes: [:id, :date_of_birth, :residence, :job], unnecessary_profile_attributes: [:id, :place_of_birth, :bio])
   end
 
   def require_login
