@@ -1,4 +1,4 @@
-<h1>ユーザー詳細</h1>
+<h1>基本情報</h1>
 
 <p>
     <strong>名前:</strong>
@@ -13,38 +13,3 @@
     <strong>メールアドレス:</strong>
     <%= @user.email %>
 </p>
-
-<h2>必要なプロフィール</h2>
-<% if @necessary_profile %>
-<p>
-    <strong>生年月日:</strong>
-    <%= @necessary_profile.date_of_birth %>
-</p>
-<p>
-    <strong>住所:</strong>
-    <%= @necessary_profile.residence %>
-</p>
-<p>
-    <strong>職業:</strong>
-    <%= @necessary_profile.job %>
-</p>
-<% else %>
-<p>必要なプロフィールがありません。</p>
-<% end %>
-
-<h2>不要なプロフィール</h2>
-<% if @unnecessary_profile %>
-<p>
-    <strong>出生地:</strong>
-    <%= @unnecessary_profile.place_of_birth %>
-</p>
-<p>
-    <strong>自己紹介:</strong>
-    <%= @unnecessary_profile.bio %>
-</p>
-<% else %>
-<p>不要なプロフィールがありません。</p>
-<% end %>
-
-<%= link_to '編集', edit_user_path(@user) %>
-<%= link_to '戻る', users_path %>

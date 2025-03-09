@@ -1,7 +1,7 @@
 class CreateNecessaryProfiles < ActiveRecord::Migration[8.0]
   def change
     drop_table :necessary_profiles
-    drop_table :unnecessary_profiles
+    drop_table :option_profiles
 
     create_table :necessary_profiles do |t|
       t.references :user, null: false, foreign_key: true

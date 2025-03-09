@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @necessary_profile = @user.build_necessary_profile
-    @unnecessary_profile = @user.build_unnecessary_profile
+    @option_profile = @user.build_option_profile
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_create_params)
 
     if @user.save
       flash[:notice] = "アカウントが作成されました！"
@@ -21,16 +21,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user, @necessary_profile, @unnecessary_profileはref_userで設定される
   end
 
   def edit
-    # @user, @necessary_profile, @unnecessary_profileはref_userで設定される
   end
 
   def update
-    # @user, @necessary_profile, @unnecessary_profileはref_userで設定される
-    if @user.update(user_params_profile)
+    if @user.update(user_edit_params)
       flash[:notice] = "アカウント情報を更新しました！"
       redirect_to @user
     else
@@ -52,8 +49,12 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
   end
 
-  def user_params
-    params.require(:user).permit(:family_name, :given_name, :email, :password, :password_confirmation, :name_order, necessary_profile_attributes: [:id, :date_of_birth, :residence, :job], unnecessary_profile_attributes: [:id, :place_of_birth, :bio])
+  def user_create_params
+    params.require(:user).permit(:family_name, :given_name, :email, :password, :password_confirmation, :name_order, necessary_profile_attributes: [:id, :date_of_birth, :residence, :job], option_profile_attributes: [:id, :place_of_birth, :bio])
+  end
+
+  def user_edit_params
+    params.require(:user).permit(:family_name, :given_name, :email, :name_order)
   end
 
   def require_login

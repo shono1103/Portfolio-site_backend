@@ -19,11 +19,11 @@ class ProfilesController < ApplicationController
     def ref_user
         @user = User.find(session[:user_id])
         @necessary_profile = @user.necessary_profile
-        @unnecessary_profile = @user.unnecessary_profile
+        @option_profile = @user.option_profile
     end
     
     def user_profile_params
-        params.require(:user).permit(necessary_profile_attributes: [:id, :date_of_birth, :residence, :job], unnecessary_profile_attributes: [:id, :place_of_birth, :bio])
+        params.require(:user).permit(necessary_profile_attributes: [:id, :date_of_birth, :residence, :job], option_profile_attributes: [:id, :place_of_birth, :bio])
     end
 
 

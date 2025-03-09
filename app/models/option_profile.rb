@@ -1,4 +1,4 @@
-class UnnecessaryProfile < ApplicationRecord
+class OptionProfile < ApplicationRecord
     belongs_to :user
 
     validates :place_of_birth, presence: true

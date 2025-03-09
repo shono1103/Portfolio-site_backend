@@ -1,0 +1,19 @@
+<h1>プロフィール</h1>
+
+<p>
+    <strong>誕生日:</strong>
+    <%= @user.necessary_profile.date_of_birth %>
+</p>
+
+<p>
+    <strong>住所:</strong>
+    <%= @user.necessary_profile.residence %>
+</p>
+
+<p>
+    <strong>職業:</strong>
+    <%= @user.necessary_profile.job %>
+</p>
+
+<%= link_to '編集', edit_user_path(@user) %> |
+<%= link_to '戻る', users_path %>

@@ -1,0 +1,36 @@
+<h1>プロフィールの編集</h1>
+
+<%= form_with(model: @user, local: true) do |f| %>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<%= f.fields_for :necessary_profile do |np| %>
+<div>
+    <%= np.label :date_of_birth, "生年月日" %>
+    <%= np.date_field :date_of_birth %>
+</div>
+<div>
+    <%= np.label :residence, "住所" %>
+    <%= np.text_field :residence %>
+</div>
+<div>
+    <%= np.label :job, "職業" %>
+    <%= np.text_field :job %>
+</div>
+<% end %>
+
+<% f.fields_for :optional_profile do |op| %>
+<div>
+
+    <div class="actions">
+        <%= f.submit "更新" %>
+    </div>
+    <% end %>
