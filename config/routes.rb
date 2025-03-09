@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   post 'users', to: 'users#create'
   get 'users/:id/profile_edit', to: 'users#edit'
-  patch 'users/:id/profile_update', to: 'users#update'
+  patch 'users/:id/profile_update', to: 'users#update_profile'
   resources :users, only: [:show ,:edit, :update]
   #ルートのルーティング
   root 'sessions#new'

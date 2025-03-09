@@ -10,15 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_04_133617) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_04_140111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "certificates", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "IPA_FE", default: false
+    t.boolean "IPA_AP", default: false
+    t.boolean "IPA_NW", default: false
+    t.boolean "IPA_DB", default: false
+    t.boolean "IPA_PM", default: false
+    t.boolean "IPA_SA", default: false
+    t.boolean "CCNA", default: false
+    t.boolean "CCNP", default: false
+    t.boolean "AWS_SAA", default: false
+    t.boolean "AWS_DVA", default: false
+    t.boolean "AWS_SOA", default: false
+    t.boolean "AWS_SAP", default: false
+    t.boolean "AWS_DOP", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_certificates_on_user_id"
+  end
 
   create_table "necessary_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.date "date_of_birth"
-    t.string "residence"
-    t.string "job"
+    t.string "residence", default: ""
+    t.string "job", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_necessary_profiles_on_user_id"
@@ -26,8 +46,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_133617) do
 
   create_table "unnecessary_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "place_of_birth"
-    t.string "bio"
+    t.string "place_of_birth", default: ""
+    t.string "bio", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_unnecessary_profiles_on_user_id"
@@ -43,6 +63,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_133617) do
     t.string "password_digest"
   end
 
+  add_foreign_key "certificates", "users"
   add_foreign_key "necessary_profiles", "users"
   add_foreign_key "unnecessary_profiles", "users"
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:show, :edit, :update]
   before_action :ref_user, only: [:show, :edit, :update]
-
+# 標準アクション====================================================================================================
   def new
     @user = User.new
     @necessary_profile = @user.build_necessary_profile
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
   def update
     # @user, @necessary_profile, @unnecessary_profileはref_userで設定される
-    if @user.update(user_params)
+    if @user.update(user_params_profile)
       flash[:notice] = "アカウント情報を更新しました！"
       redirect_to @user
     else
@@ -39,12 +39,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "アカウントが削除されました！"
+    redirect_to login_path
+  end
+# private メソッド====================================================================================================
   private
 
   def ref_user
     @user = User.find(session[:user_id])
-    @necessary_profile = @user.necessary_profile
-    @unnecessary_profile = @user.unnecessary_profile
   end
 
   def user_params
